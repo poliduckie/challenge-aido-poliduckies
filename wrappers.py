@@ -1,8 +1,5 @@
 import cv2
-import gym
 import numpy as np
-
-from gym.spaces import Box
 
 cutted_img_height = 350 #@param {type: "slider", min: 0, max: 480, step:1}
 resize_ratio = 0.35 #@param {type: "slider", min: 0.0, max: 1.0, step:0.01}

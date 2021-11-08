@@ -1,11 +1,7 @@
 import io
 from typing import Optional
 
-import cv2
-import gym
 import numpy as np
-from gym.spaces import Box
-from stable_baselines3 import PPO
 from PIL import Image
 
 from wrappers import SBWrapper
