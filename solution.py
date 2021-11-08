@@ -37,7 +37,7 @@ class StableBaselineAgent:
         if self.model_path:
             self.model = PPO.load(self.model_path)
         else:
-            self.model = PPO.load("model")
+            self.model = PPO.load("model.zip")
         self.current_image = np.zeros((640, 480, 3))
 
         logger.info("Model loaded.")
