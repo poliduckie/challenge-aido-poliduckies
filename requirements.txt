@@ -1,0 +1,7 @@
+pipdeptree
+aido-protocols-daffy
+duckietown-utils-daffy
+stable-baselines3
+cv2
+gym
+torch
