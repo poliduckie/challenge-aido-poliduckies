@@ -34,10 +34,15 @@ class StableBaselineAgent:
         from stable_baselines3 import PPO
 
         self.preprocessor = SBWrapper()
+        custom_objects = {
+            "learning_rate": 0.0,
+            "lr_schedule": lambda _: 0.0,
+            "clip_range": lambda _: 0.0,
+        }
         if self.model_path:
             self.model = PPO.load(self.model_path)
         else:
-            self.model = PPO.load("model.zip")
+            self.model = PPO.load("models/model", custom_objects=custom_objects)
         self.current_image = np.zeros((640, 480, 3))
 
         logger.info("Model loaded.")

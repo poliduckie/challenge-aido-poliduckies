@@ -1,10 +1,15 @@
 # challenge name(s); defaults to all compatible challenges
-challenge: [LF]
+challenge: 
+  - aido5-LF-sim-validation
 
 # conventions + format
+# https://docs.duckietown.org/daffy/AIDO/draft/agent_protocols.html
 protocol: aido2_db18_agent-z2
 # any user label - displayed in "challenges list"
 user-label: poliduckie-test1
 # any JSON payload
-user-payload: {}
-validation_challenge: aido-LF-sim-validation
+user-payload:
+    features_required:
+        gpu: 1
+
+validation_challenge: aido5-LF-sim-validation
