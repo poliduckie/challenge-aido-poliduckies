@@ -1,6 +1,6 @@
 # challenge name(s); defaults to all compatible challenges
 challenge: 
-  - aido5-LF-sim-validation
+  - aido-LF-sim-validation
 
 # conventions + format
 # https://docs.duckietown.org/daffy/AIDO/draft/agent_protocols.html
@@ -12,4 +12,4 @@ user-payload:
     features_required:
         gpu: 1
 
-validation_challenge: aido5-LF-sim-validation
+validation_challenge: aido-LF-sim-validation

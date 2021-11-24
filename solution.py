@@ -73,7 +73,8 @@ class StableBaselineAgent:
         self.current_image = self.preprocessor.preprocess(obs)
 
     def compute_action(self, observation):
-        observation = self.preprocessor.preprocess(observation)
+        if observation.shape != self.preprocessor.transposed_shape:
+            observation = self.preprocessor.preprocess(observation)
         action, _ = self.model.predict(observation)
         return action.astype(float)
 

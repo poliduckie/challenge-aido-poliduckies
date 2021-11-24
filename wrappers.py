@@ -42,7 +42,12 @@ def resizeimg(img, ratio):
     :param img: (np array)
     :param ratio: (float) 0<ratio<1
     """
-    return cv2.resize(img, (0,0), fx=ratio, fy=ratio) 
+    try:
+        return cv2.resize(img, (0,0), fx=ratio, fy=ratio)
+    except cv2.error as e:
+        print(e)
+        print("Error: Image too small")
+        return img
   
 def takeyellow(img):
     """
@@ -91,6 +96,7 @@ def white_balance(img):
     return result
 
 class SBWrapper:
+    transposed_shape = (img_final_height, img_final_width, 3)
     def __init__(self):
         pass
     
