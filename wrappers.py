@@ -95,6 +95,27 @@ def white_balance(img):
     result = cv2.cvtColor(result, cv2.COLOR_LAB2RGB)
     return result
 
+def birdeye(img, test=False):
+    """
+    Apply perspective transform to image, for theory see:
+    https://docs.opencv.org/3.4/da/d6e/tutorial_py_geometric_transformations.html
+
+    Also:
+    https://stackoverflow.com/questions/48264861/birds-eye-view-opencv
+    """
+    black_wd = int(2500*resize_ratio)
+    black_img = np.zeros(shape=(img.shape[0], black_wd, 3), dtype=np.uint8)
+    x_offset=int((black_wd-img.shape[0])/2)
+    black_img[:img.shape[0], x_offset:x_offset+img.shape[1]] = img
+    img = black_img
+    row, cols, ch = img.shape
+    src = np.float32([[1060, 170], [1600, 170], [110, row/resize_ratio], [cols/resize_ratio, row/resize_ratio]])*resize_ratio
+    dst = np.float32([[0,0],[img_final_width,0],[0,img_final_height],[img_final_width,img_final_height]])
+    M = cv2.getPerspectiveTransform(src, dst)
+    img_transformed = cv2.warpPerspective(img, M, (cols, row))
+    img_cutted_to_480_640 = img_transformed[:img_final_height, :img_final_width]
+    return img_cutted_to_480_640
+
 class SBWrapper:
     transposed_shape = (img_final_height, img_final_width, 3)
     def __init__(self):
@@ -104,9 +125,10 @@ class SBWrapper:
         """
         Preprocess the observation
         """
-        cropped = cropimg(obs)
-        resized = resizeimg(cropped, resize_ratio)
-        balanced = white_balance(resized)
-        extracted_colors = takewhiteyellow(balanced)
-        img = extracted_colors/255
-        return img
+        # cropped = cropimg(obs)
+        balanced = white_balance(obs)
+        img = takewhiteyellow(balanced)
+        resized = resizeimg(img, resize_ratio)
+        bird = birdeye(resized)
+        # img = extracted_colors/255
+        return bird

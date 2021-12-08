@@ -6,7 +6,7 @@ challenge:
 # https://docs.duckietown.org/daffy/AIDO/draft/agent_protocols.html
 protocol: aido2_db18_agent-z2
 # any user label - displayed in "challenges list"
-user-label: poliduckie-test1
+user-label: poliduckie-final
 # any JSON payload
 user-payload:
     features_required:
